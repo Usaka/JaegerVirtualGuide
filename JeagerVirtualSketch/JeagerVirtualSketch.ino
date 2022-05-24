@@ -15,8 +15,8 @@ SocketIOclient socketIO;
 
 #define USE_SERIAL Serial
 
-char* HOST_SOCKET = "192.168.1.60";
-int PORT_SOCKET = 10011;
+char* HOST_SOCKET = "animalgeek.sytes.net";
+int PORT_SOCKET = 10019;
 char* PARAMS_SOCKET = "/socket.io/?EIO=4";
 char* SSID_WIFI = "Amorcitos";
 char* PASS_WIFI = "4m0rc1t05";

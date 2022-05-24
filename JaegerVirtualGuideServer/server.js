@@ -8,8 +8,8 @@ const io = new Server(server, {
     }
 });
 
-const port = 10010
-const port_socket = 10011
+const port = 10018
+const port_socket = 10019
 let log = ''
 
 app.get('/', (req, res) => {
