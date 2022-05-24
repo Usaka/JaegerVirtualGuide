@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
     log += 'A user connected <br>'
 
     socket.on('jeager', msg => {
-        log += `${msg} <br>`
+        log += `${new Date().toString()}:${msg} <br>`
         io.emit('jeager', msg);
     });
 });
