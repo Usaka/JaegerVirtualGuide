@@ -19,8 +19,6 @@
 
     function enviar(){
       let value = document.getElementById('textInput').value
-      console.log(value)
-
       socket.emit('jeager', value);
       document.getElementById('textInput').value = '';
     }
