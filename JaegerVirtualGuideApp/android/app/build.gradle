@@ -218,6 +218,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('production.keystore')
+            storePassword 'jaeger'
+            keyAlias 'jaeger'
+            keyPassword 'jaeger'
+        }
     }
     buildTypes {
         debug {
