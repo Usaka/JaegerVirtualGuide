@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
         log += `${new Date().toString()}:${msg} <br>`
         io.emit('jeager', msg);
     });
+
+    socket.on('jeager-video', msg => {
+        io.emit('jeager-video', msg);
+    });
 });
 
 app.listen(port, () => {
