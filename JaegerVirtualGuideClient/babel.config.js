@@ -3,12 +3,9 @@ module.exports = {
   plugins: [
     [
       'react-native-reanimated/plugin',
-    ]
-    // [
-    //   'react-native-reanimated/plugin',
-    //   {
-    //     globals: ['__getBufferArray'],
-    //   },
-    // ]
+      {
+        globals: ['__resize'],
+      },
+    ],
   ]
 };

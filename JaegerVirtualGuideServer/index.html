@@ -14,6 +14,7 @@
     </script>
   <script>
     var socket = io('http://animalgeek.sytes.net:10019');
+    var fps = 0;
 
     //Socket commands
     //1 -> Izq
@@ -39,7 +40,14 @@
     socket.on('jeager-video', function (msg) {
       var imageC = document.getElementById('image');
       imageC.src = `data:image/jpeg;base64, ${msg}`;
+      fps += 1;
     })
+
+    setInterval(() => {
+      var item = document.getElementById('return');
+      item.textContent = fps;
+      fps = 0;
+    }, 1000)
 
     socket.on("error", (err) => {
       if (err) {
