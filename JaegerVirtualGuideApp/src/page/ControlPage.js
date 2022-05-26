@@ -17,10 +17,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import io from 'socket.io-client';
 
 // Componente que renderiza los controles
-const socket = io('http://animalgeek.sytes.net:10019');
-
 function ControlPage() {
   const navigation = useNavigation();
+  const socket = io('http://animalgeek.sytes.net:10019');
 
   // Estados de los controles
   const [showSpinner, setShowSpinner] = useState(true);

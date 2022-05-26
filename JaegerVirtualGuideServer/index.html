@@ -1,13 +1,17 @@
 <html>
+
 <head>
 </head>
+
 <body>
   <div id="text"></div>
   <input type="text" id="textInput">
+  <img id="image" src="" style="height: 500px; width: 500px;" />
   <button onclick="enviar()"> Send </button>
   <div id="return"></div>
-  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous">
-  </script>
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+    integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous">
+    </script>
   <script>
     var socket = io('http://animalgeek.sytes.net:10019');
 
@@ -17,7 +21,7 @@
     //0 -> Avanzar
     //9 -> PARAR
 
-    function enviar(){
+    function enviar() {
       let value = document.getElementById('textInput').value
       socket.emit('jeager', value);
       document.getElementById('textInput').value = '';
@@ -27,9 +31,14 @@
       console.log(socket.id);
     })
 
-    socket.on('jeager', function(msg) {
+    socket.on('jeager', function (msg) {
       var item = document.getElementById('return');
       item.textContent = msg;
+    })
+
+    socket.on('jeager-video', function (msg) {
+      var imageC = document.getElementById('image');
+      imageC.src = `data:image/jpeg;base64, ${msg}`;
     })
 
     socket.on("error", (err) => {
@@ -39,4 +48,5 @@
     })
   </script>
 </body>
+
 </html>
