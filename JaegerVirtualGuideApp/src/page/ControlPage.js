@@ -1,14 +1,16 @@
+/* eslint-disable react/jsx-filename-extension */
 /**
  * Componente que permite visualizar y controlar el Jaeger
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -22,7 +24,7 @@ function ControlPage() {
   const socket = io('http://animalgeek.sytes.net:10019');
 
   // Estados de los controles
-  const [showSpinner, setShowSpinner] = useState(true);
+  const [image, setImage] = useState('');
 
   // Metodo para realizar el deslogueo
   const onLogOut = () => {
@@ -61,19 +63,35 @@ function ControlPage() {
     socket.emit('jeager', '3');
   };
 
+  socket.on('jeager-video', (data) => {
+    if (data.length > 0) {
+      setImage(`data:image/jpeg;base64,${data}`);
+    }
+  });
+
   return (
     <View style={styles.container}>
       {/* Spinner que indica el estado de la conexión */}
-      <ActivityIndicator
-        animating={showSpinner}
-        size="large"
-        color="#3333EEAA"
-      />
-      {showSpinner
-        && (
-          <Text style={styles.textBlack}>
-            Esperando imagen del Jaeger
-          </Text>
+      {image.length < 0
+        ? (
+          <>
+            <ActivityIndicator
+              animating
+              size="large"
+              color="#3333EEAA"
+            />
+            <Text style={styles.textBlack}>
+              Esperando imagen del Jaeger
+            </Text>
+          </>
+        ) : (
+          <Image
+            style={{
+              height: 300,
+              width: 150,
+            }}
+            source={{ uri: image }}
+          />
         )}
       {/* Boton para el logout del usuario */}
       <View style={styles.containerLogout}>

@@ -12,8 +12,12 @@ const port = 10018
 const port_socket = 10019
 let log = ''
 
-app.get('/', (req, res) => {
+app.get('/Log', (req, res) => {
     res.send(`Log de mensajes enviados desde los dispositivos => <br> ${log}`)
+})
+
+app.get('/', (req, res) => {
+    res.sendFile('index.html', {root: __dirname })
 })
 
 io.on('connection', (socket) => {

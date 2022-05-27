@@ -18,12 +18,13 @@ SocketIOclient socketIO;
 char* HOST_SOCKET = "animalgeek.sytes.net";
 int PORT_SOCKET = 10019;
 char* PARAMS_SOCKET = "/socket.io/?EIO=4";
-char* SSID_WIFI = "Amorcitos";
-char* PASS_WIFI = "4m0rc1t05";
+char* SSID_WIFI = "HGP";
+char* PASS_WIFI = "hgp081593";
 
 String action_id = "";
 #define DER 5 //Verde
 #define IZQ 4 //Naranja
+#define LED 2 //LED
 
 //------------- SOCKET CONTROL ----------------------------------------
 void socketIOEvent(socketIOmessageType_t type, uint8_t* payload, size_t length) {
@@ -33,9 +34,11 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t* payload, size_t length) 
   switch (type) {
     case sIOtype_DISCONNECT:
       USE_SERIAL.printf("[IOc] Disconnected!\n");
+      digitalWrite(LED, LOW);
       break;
     case sIOtype_CONNECT:
       USE_SERIAL.printf("[IOc] Connected to url: %s\n", payload);
+      digitalWrite(LED, HIGH);
 
       // join default namespace (no auto join in Socket.IO V3)
       socketIO.send(sIOtype_CONNECT, "/");
@@ -69,6 +72,10 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t* payload, size_t length) 
 //------------- SETUP ----------------------------------------
 void setup() {
   // USE_SERIAL.begin(921600);
+  pinMode(DER, OUTPUT);
+  pinMode(IZQ, OUTPUT);
+  pinMode(LED, OUTPUT);
+  
   USE_SERIAL.begin(115200);
 
   //Serial.setDebugOutput(true);
@@ -104,9 +111,6 @@ void setup() {
 
   // event handler
   socketIO.onEvent(socketIOEvent);
-
-  pinMode(DER, OUTPUT);
-  pinMode(IZQ, OUTPUT);
 }
 
 //------------- LOOP ----------------------------------------
